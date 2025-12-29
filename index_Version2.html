@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mis Proyectos — Vistosa</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-theme="light">
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <svg width="36" height="36" viewBox="0 0 24 24" aria-hidden="true"><defs/><path fill="currentColor" d="M12 2l9 4v6c0 5-3 9-9 10S3 17 3 12V6l9-4z"/></svg>
+        <h1>Proyectos</h1>
+      </div>
+
+      <nav class="nav">
+        <button class="nav-btn active" data-page="home">Inicio</button>
+        <button class="nav-btn" data-page="projects">Proyectos</button>
+        <button class="nav-btn" data-page="about">Acerca</button>
+        <button class="nav-btn" data-page="settings">Ajustes</button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <button id="btn-theme" class="ghost">Tema: Claro</button>
+        <button id="btn-export" class="ghost">Exportar JSON</button>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="search-wrap">
+          <input id="search" placeholder="Buscar por título o etiqueta..." />
+          <button id="btn-add" title="Nuevo proyecto">＋</button>
+        </div>
+
+        <div class="controls-right">
+          <label class="small">Margen
+            <input id="margin-range" type="range" min="0" max="48" value="12" />
+          </label>
+          <div class="page-indicator" id="page-indicator">Página 1</div>
+        </div>
+      </header>
+
+      <section id="page-home" class="page visible">
+        <div class="hero">
+          <h2>Bienvenido — Administra y aprende</h2>
+          <p>Interfaz interactiva para practicar front-end: añade proyectos, edítalos en sitio, comenta y juega con márgenes, temas y paginación.</p>
+          <div class="hero-actions">
+            <button id="hero-add">＋ Nuevo proyecto</button>
+            <button data-page="projects" class="ghost goto">Ver proyectos</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="page-projects" class="page">
+        <div class="cards-toolbar">
+          <div class="tabs">
+            <button class="tab active" data-filter="all">Todos</button>
+            <button class="tab" data-filter="fav">Favoritos</button>
+            <button class="tab" data-filter="recent">Recientes</button>
+          </div>
+          <div class="pagination">
+            <button id="prev-page" class="ghost">◀</button>
+            <span id="pager">1 / 1</span>
+            <button id="next-page" class="ghost">▶</button>
+          </div>
+        </div>
+
+        <main id="cards" class="cards-grid" aria-live="polite"></main>
+      </section>
+
+      <section id="page-about" class="page">
+        <article class="card single">
+          <h2>Acerca de esta app</h2>
+          <p>Plantilla educativa para practicar UI/UX y JavaScript: SPA simple, edición in-place (contentEditable), almacenamiento local y componentes reutilizables.</p>
+          <p>Puedes exportar/importar JSON desde Ajustes.</p>
+        </article>
+      </section>
+
+      <section id="page-settings" class="page">
+        <article class="card single">
+          <h2>Ajustes</h2>
+          <label>Guardar automático
+            <input id="autosave" type="checkbox" checked>
+          </label>
+          <label>Proyectos por página
+            <input id="per-page" type="number" min="1" max="20" value="6">
+          </label>
+          <div class="settings-actions">
+            <button id="btn-import" class="ghost">Importar JSON</button>
+            <button id="btn-reset" class="danger">Resetear a ejemplos</button>
+          </div>
+          <small class="muted">Importar espera un archivo JSON con la misma estructura que la exportación.</small>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <!-- Dialog nuevo proyecto -->
+  <dialog id="dialog-new">
+    <form method="dialog" id="form-new">
+      <h3>Nuevo proyecto</h3>
+      <label>
+        Título
+        <input type="text" id="new-title" required>
+      </label>
+      <label>
+        Descripción
+        <textarea id="new-desc" rows="4"></textarea>
+      </label>
+      <label>
+        Etiquetas (coma)
+        <input type="text" id="new-tags">
+      </label>
+      <menu>
+        <button id="cancel-new" type="reset">Cancelar</button>
+        <button id="accept-new" type="submit">Crear</button>
+      </menu>
+    </form>
+  </dialog>
+
+  <input id="file-import" type="file" accept="application/json" style="display:none" />
+
+  <script src="app.js" defer></script>
+</body>
+</html>
